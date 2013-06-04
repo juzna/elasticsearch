@@ -209,6 +209,13 @@ class HTTP extends Base {
             throw $exception;
         }
 
+        // callback
+        if ($this->onCall) {
+            foreach ($this->onCall as $cb) {
+                call_user_func($cb, $url, $method, $payload, $data);
+            }
+        }
+
         return $data;
     }
 }
